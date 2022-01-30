@@ -16,6 +16,9 @@
   ],
   "author": "Hafez Kaghazi",
   "license": "MIT",
+  "dependencies": {
+    "jalali-moment": "^3.3.10"
+  },
   "devDependencies": {
     "@babel/core": "^7.16.12",
     "@babel/preset-env": "^7.16.11",

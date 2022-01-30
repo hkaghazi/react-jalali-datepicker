@@ -1,0 +1,17 @@
+.rjd__days-head-container {
+  display: flex;
+  width: 100%;
+  margin-bottom: 16px;
+
+  .rjd__days-head-items {
+    display: inline-flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+  }
+
+  .rjd__holiday {
+    color: red;
+  }
+}

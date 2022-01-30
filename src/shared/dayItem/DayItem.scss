@@ -1,0 +1,38 @@
+.rjd__day-item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  user-select: none;
+  transition: all 0.3s ease-in-out;
+  margin: 2px;
+
+  &.disabled {
+    cursor: default;
+    color: silver;
+
+    &:hover {
+      background-color: white;
+    }
+  }
+
+  &.selected {
+    background-color: aquamarine;
+
+    &:hover {
+      background-color: rgb(102, 255, 204);
+    }
+  }
+
+  &.rjd__holiday {
+    color: red;
+  }
+
+  &:hover {
+    background-color: rgb(226, 226, 226);
+  }
+
+}

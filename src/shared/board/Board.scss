@@ -1,0 +1,35 @@
+.rjd__board-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 16px;
+
+  .rjd__board-text {
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+    padding: 6px 12px;
+    background-color: rgb(231, 231, 231);
+    border-radius: 18px;
+    user-select: none;
+    cursor: pointer;
+  }
+
+  .rjd__go-back,
+  .rjd__go-forward {
+    background: none;
+    background-color: none;
+    border: solid 1px silver;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    padding: 3px;
+    cursor: pointer;
+    user-select: none;
+
+    &:hover {
+      background-color: rgb(231, 231, 231);
+    }
+  }
+}

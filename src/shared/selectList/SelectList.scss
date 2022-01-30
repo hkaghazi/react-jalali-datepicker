@@ -1,0 +1,42 @@
+.rjd__select-list-container {
+  position: relative;
+  width: 120px;
+  height: 200px;
+  margin: 20px auto;
+  background: rgba(235, 235, 235, 0.3);
+  border-radius: 10px;
+  text-align: center;
+  overflow: hidden;
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    transform: translatey(0);
+    transition: 0.3s;
+
+    li {
+      line-height: 40px;
+      opacity: 0.3;
+      transform: scale(0.85);
+      transition: 0.3s;
+      cursor: pointer;
+      user-select: none;
+
+      &.active {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+  }
+
+  .centerBox {
+    position: absolute;
+    transform: translateY(-50%);
+    top: 50%;
+    height: 40px;
+    width: 100%;
+    border-top: 1px solid #666;
+    border-bottom: 1px solid #666;
+  }
+}
