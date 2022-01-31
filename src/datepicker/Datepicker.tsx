@@ -7,13 +7,15 @@ import { Months } from "../views/months/Months"
 
 import "./Datepicker.scss"
 
-type DatepickerProps = {
+type DatepickerProps = React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> & {
   label?: string
   defaultValue?: Moment | Date | string | number
+  errorMessage?: string
+  containerStyle?: string
 }
 
-export const Datepicker: React.FC<DatepickerProps> = (props) => {
-  const { defaultValue } = props
+export const Datepicker = React.forwardRef<HTMLInputElement, DatepickerProps>((props, ref) => {
+  const { errorMessage, containerStyle, label, className, defaultValue } = props
   const [value, setValue] = React.useState<moment.Moment>(moment())
 
   // local variables
@@ -62,11 +64,22 @@ export const Datepicker: React.FC<DatepickerProps> = (props) => {
   }
 
   return (
-    <div className="datepicker__wrapper">
+    <div className={`datepicker__wrapper ${containerStyle}`}>
       <label htmlFor="datapicker__input">
         <span>{props.label}</span>
-        <input id="datapicker__input" type="text" readOnly value={value.format("jYYYY/jMM/jDD")} onClick={() => setModalIsOpen(true)} />
+        <input
+          id="datapicker__input"
+          ref={ref}
+          {...props}
+          className={`${className} bg-gray-100 py-2 px-3 rounded-lg w-full ` + (errorMessage ? "border-2 border-red-600 focus:outline-none " : "")}
+          type="text"
+          readOnly
+          value={value.format("jYYYY/jMM/jDD")}
+          onClick={() => setModalIsOpen(true)}
+        />
       </label>
+
+      {errorMessage && <small className="block text-xs text-red-600 select-none">{errorMessage}</small>}
 
       <Modal isOpen={modalIsOpen} onDismis={() => setModalIsOpen(false)}>
         <Board currentValue={value} switchView={() => (currentView == "days" ? setCurrentView("months") : setCurrentView("days"))} updateValue={(newValue) => setValue(newValue)} />
@@ -74,4 +87,4 @@ export const Datepicker: React.FC<DatepickerProps> = (props) => {
       </Modal>
     </div>
   )
-}
+})
