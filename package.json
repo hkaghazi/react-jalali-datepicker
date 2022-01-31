@@ -1,6 +1,6 @@
 {
   "name": "@hkaghazi/react-jalali-datepicker",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "persian datepicker based on jalali-moment",
   "scripts": {
     "test": "jest",
@@ -31,6 +31,10 @@
   "dependencies": {
     "jalali-moment": "^3.3.10"
   },
+  "peerDependencies": {
+    "react": "^17.0.0",
+    "react-dom": "^17.0.0"
+  },
   "devDependencies": {
     "@babel/core": "^7.16.12",
     "@babel/preset-env": "^7.16.11",
@@ -56,8 +60,6 @@
     "identity-obj-proxy": "^3.0.0",
     "jest": "^27.4.7",
     "postcss": "^8.4.5",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
     "rollup": "^2.66.1",
     "rollup-plugin-dts": "^4.1.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",
