@@ -4,7 +4,8 @@ import { Modal } from "../shared/modal/Modal"
 import { Days } from "../views/days/Days"
 import { Board } from "../shared/board/Board"
 import { Months } from "../views/months/Months"
-import "src/datapicker/Datepicker.scss"
+
+import "./Datepicker.scss"
 
 type DatepickerProps = {
   label?: string
