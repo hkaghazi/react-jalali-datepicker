@@ -3,8 +3,8 @@ import moment, { Moment } from "jalali-moment"
 import { Modal } from "../shared/modal/Modal"
 import { Days } from "../views/days/Days"
 import { Board } from "../shared/board/Board"
-import "./datepicker.scss"
 import { Months } from "../views/months/Months"
+import "src/datapicker/Datepicker.scss"
 
 type DatepickerProps = {
   label?: string
