@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useRef } from "react"
 import moment, { Moment } from "jalali-moment"
 import { Modal } from "../shared/modal/Modal"
 import { Days } from "../views/days/Days"
@@ -9,36 +9,22 @@ import "./Datepicker.scss"
 
 type DatepickerProps = React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> & {
   label?: string
-  defaultValue?: Moment | Date | string | number
   errorMessage?: string
   containerStyle?: string
+  onChangeValue?: (value: Moment) => void
 }
 
-export const Datepicker = React.forwardRef<HTMLInputElement, DatepickerProps>((props, ref) => {
-  const { errorMessage, containerStyle, label, className, defaultValue } = props
+export const Datepicker = React.forwardRef<HTMLInputElement, DatepickerProps>((props, ref: any) => {
+  const { errorMessage, containerStyle, label, className, defaultValue, onChangeValue } = props
   const [value, setValue] = React.useState<moment.Moment>(moment())
 
   // local variables
   const [modalIsOpen, setModalIsOpen] = React.useState(false)
   const [currentView, setCurrentView] = React.useState<"days" | "months" | "years">("days")
 
-  useEffect(() => {
-    if (!modalIsOpen) {
-      setCurrentView("days")
-    }
-  }, [modalIsOpen])
-
   // set defualt value
   useEffect(() => {
     if (defaultValue) {
-      if (typeof defaultValue == typeof moment) {
-        setValue(defaultValue as Moment)
-      }
-
-      if (defaultValue instanceof Date) {
-        setValue(moment(defaultValue))
-      }
-
       if (typeof defaultValue == "string" || typeof defaultValue == "number") {
         if (moment(defaultValue).isValid()) {
           setValue(moment(defaultValue))
@@ -47,15 +33,17 @@ export const Datepicker = React.forwardRef<HTMLInputElement, DatepickerProps>((p
     }
   }, [defaultValue])
 
+  useEffect(() => {
+    if (onChangeValue) {
+      onChangeValue(value)
+    }
+  }, [value])
+
   //
   let view
   switch (currentView) {
     case "months":
       view = <Months currentValue={value} switchView={(v) => setCurrentView(v)} updateValue={(newValue) => setValue(newValue)} />
-      break
-
-    case "years":
-      // !TODO
       break
 
     default:
@@ -66,7 +54,7 @@ export const Datepicker = React.forwardRef<HTMLInputElement, DatepickerProps>((p
   return (
     <div className={`datepicker__wrapper ${containerStyle}`}>
       <label htmlFor="datapicker__input">
-        <span>{props.label}</span>
+        <span>{label}</span>
         <input
           id="datapicker__input"
           ref={ref}

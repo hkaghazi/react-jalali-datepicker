@@ -25,12 +25,8 @@ export const Days: React.FC<DaysProps> = ({ currentValue, updateValue, dismissMo
   useEffect(() => {
     currentValue.locale("fa")
 
-    console.log(currentValue.toISOString())
-
     setDaysInMonth([...daysBeforeThisMonth(currentValue), ...daysThisMonth(currentValue), ...daysAfterThisMonth(currentValue)])
   }, [currentValue])
-
-  // console.log(daysInMonth)
 
   return (
     <div className="rjd__days-container">
