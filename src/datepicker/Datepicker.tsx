@@ -7,31 +7,22 @@ import { Months } from "../views/months/Months"
 
 import "./Datepicker.scss"
 
-type DatepickerProps = React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> & {
+type DatepickerProps = {
   label?: string
+  className?: string
   errorMessage?: string
   containerStyle?: string
+  defaultValue?: Date
   onChangeValue?: (value: Moment) => void
 }
 
-export const Datepicker = React.forwardRef<HTMLInputElement, DatepickerProps>((props, ref: any) => {
+export const Datepicker: React.FC<DatepickerProps> = (props) => {
   const { errorMessage, containerStyle, label, className, defaultValue, onChangeValue } = props
-  const [value, setValue] = React.useState<moment.Moment>(moment())
+  const [value, setValue] = React.useState<moment.Moment>(moment(defaultValue))
 
   // local variables
   const [modalIsOpen, setModalIsOpen] = React.useState(false)
   const [currentView, setCurrentView] = React.useState<"days" | "months" | "years">("days")
-
-  // set defualt value
-  useEffect(() => {
-    if (defaultValue) {
-      if (typeof defaultValue == "string" || typeof defaultValue == "number") {
-        if (moment(defaultValue).isValid()) {
-          setValue(moment(defaultValue))
-        }
-      }
-    }
-  }, [defaultValue])
 
   useEffect(() => {
     if (onChangeValue) {
@@ -57,8 +48,6 @@ export const Datepicker = React.forwardRef<HTMLInputElement, DatepickerProps>((p
         <span>{label}</span>
         <input
           id="datapicker__input"
-          ref={ref}
-          {...props}
           className={`${className} bg-gray-100 py-2 px-3 rounded-lg w-full ` + (errorMessage ? "border-2 border-red-600 focus:outline-none " : "")}
           type="text"
           readOnly
@@ -75,4 +64,4 @@ export const Datepicker = React.forwardRef<HTMLInputElement, DatepickerProps>((p
       </Modal>
     </div>
   )
-})
+}
