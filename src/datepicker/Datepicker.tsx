@@ -11,13 +11,14 @@ type DatepickerProps = {
   label?: string
   className?: string
   errorMessage?: string
+  disabled?: boolean
   containerStyle?: string
   defaultValue?: Date
   onChangeValue?: (value: Moment) => void
 }
 
 export const Datepicker: React.FC<DatepickerProps> = (props) => {
-  const { errorMessage, containerStyle, label, className, defaultValue, onChangeValue } = props
+  const { errorMessage, containerStyle, label, className, defaultValue, onChangeValue, disabled } = props
   const [value, setValue] = React.useState<moment.Moment>(moment(defaultValue))
 
   // local variables
@@ -51,8 +52,13 @@ export const Datepicker: React.FC<DatepickerProps> = (props) => {
           className={`${className} bg-gray-100 py-2 px-3 rounded-lg w-full ` + (errorMessage ? "border-2 border-red-600 focus:outline-none " : "")}
           type="text"
           readOnly
+          disabled={disabled}
           value={value.format("jYYYY/jMM/jDD")}
-          onClick={() => setModalIsOpen(true)}
+          onClick={() => {
+            if (!disabled) {
+              setModalIsOpen(true)
+            }
+          }}
         />
       </label>
 
