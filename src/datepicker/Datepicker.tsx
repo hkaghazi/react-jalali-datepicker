@@ -33,7 +33,7 @@ export const Datepicker: React.FC<DatepickerProps> = (props) => {
   }, [_value])
 
   useEffect(() => {
-    if (value) {
+    if (value && moment(value).isValid()) {
       if (_value.format("YYYY-MM-DD") != moment(value).format("YYYY-MM-DD")) {
         setValue(moment(value))
       }

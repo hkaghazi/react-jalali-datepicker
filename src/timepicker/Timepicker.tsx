@@ -31,7 +31,7 @@ export const Timepicker: React.FC<DatepickerProps> = (props) => {
   }, [_value])
 
   useEffect(() => {
-    if (value) {
+    if (value && moment(value).isValid()) {
       if (_value.format("hh:mm") != moment(value).format("hh:mm")) {
         setValue(moment(value))
       }

@@ -31,7 +31,7 @@ export const Months: React.FC<DaysProps> = ({ currentValue, switchView, updateVa
     <div className="rjd__months-container">
       <SelectList list={months} defaultValue={currentMonth} onChange={(v) => updateValueByMonth(String(v))} />
       <SelectList list={getYearsList()} defaultValue={currentYear} onChange={(v) => updateValueByYear(String(v))} />
-      <button className="rjd__btn-return" onClick={() => switchView("days")}>
+      <button type="button" className="rjd__btn-return" onClick={() => switchView("days")}>
         تایید
       </button>
     </div>

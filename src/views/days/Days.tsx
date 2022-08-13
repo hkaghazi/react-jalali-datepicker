@@ -38,7 +38,7 @@ export const Days: React.FC<DaysProps> = ({ currentValue, updateValue, dismissMo
         ))}
       </div>
 
-      <button className="rjd__btn-return" onClick={dismissModal}>
+      <button type="button" className="rjd__btn-return" onClick={dismissModal}>
         تایید
       </button>
     </div>

@@ -30,7 +30,7 @@ export const Hours: React.FC<DaysProps> = ({ currentValue, updateValue }) => {
     <div className="rjd__months-container">
       <SelectList list={minutesList()} defaultValue={currentMinute} onChange={(v) => updateValueByMinute(Number(v))} />
       <SelectList list={hoursList()} defaultValue={currentHour} onChange={(v) => updateValueByHour(Number(v))} />
-      <button className="rjd__btn-return" onClick={() => {}}>
+      <button type="button" className="rjd__btn-return" onClick={() => {}}>
         تایید
       </button>
     </div>
