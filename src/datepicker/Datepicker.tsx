@@ -42,7 +42,7 @@ export const Datepicker: React.FC<DatepickerProps> = (props) => {
 
   const onDayselect = (newValue: moment.Moment) => {
     setValue(newValue)
-    if (newValue.format("YYYY-MM-DD") == _value.format("YYYY-MM-DD")) {
+    if (newValue.format("jYYYY-jMM-jDD") == _value.format("jYYYY-jMM-jDD")) {
       setModalIsOpen(false)
     }
   }
