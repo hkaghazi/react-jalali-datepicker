@@ -1,0 +1,23 @@
+.rjd__months-container {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: auto auto;
+
+  .rjd__btn-return {
+    display: block;
+    background: none;
+    font-size: 14px;
+    border: solid 1px rgb(219, 219, 219);
+    border-radius: 12px;
+    padding: 8px 12px;
+    width: 100%;
+    grid-column: span 2;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+    user-select: none;
+
+    &:hover {
+      background-color: rgb(220, 220, 220);
+    }
+  }
+}
