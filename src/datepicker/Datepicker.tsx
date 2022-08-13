@@ -13,13 +13,14 @@ type DatepickerProps = {
   errorMessage?: string
   disabled?: boolean
   containerStyle?: string
-  defaultValue?: Date
+  defaultValue?: moment.MomentInput
+  value?: moment.MomentInput
   onChangeValue?: (value: Moment) => void
 }
 
 export const Datepicker: React.FC<DatepickerProps> = (props) => {
-  const { errorMessage, containerStyle, label, className, defaultValue, onChangeValue, disabled } = props
-  const [value, setValue] = React.useState<moment.Moment>(moment(defaultValue))
+  const { errorMessage, containerStyle, label, className, defaultValue, value, onChangeValue, disabled } = props
+  const [_value, setValue] = React.useState<moment.Moment>(moment(defaultValue))
 
   // local variables
   const [modalIsOpen, setModalIsOpen] = React.useState(false)
@@ -27,7 +28,15 @@ export const Datepicker: React.FC<DatepickerProps> = (props) => {
 
   useEffect(() => {
     if (onChangeValue) {
-      onChangeValue(value)
+      onChangeValue(_value)
+    }
+  }, [_value])
+
+  useEffect(() => {
+    if (value) {
+      if (_value.format("YYYY-MM-DD") != moment(value).format("YYYY-MM-DD")) {
+        setValue(moment(value))
+      }
     }
   }, [value])
 
@@ -35,11 +44,11 @@ export const Datepicker: React.FC<DatepickerProps> = (props) => {
   let view
   switch (currentView) {
     case "months":
-      view = <Months currentValue={value} switchView={(v) => setCurrentView(v)} updateValue={(newValue) => setValue(newValue)} />
+      view = <Months currentValue={_value} switchView={(v) => setCurrentView(v)} updateValue={(newValue) => setValue(newValue)} />
       break
 
     default:
-      view = <Days currentValue={value} dismissModal={() => setModalIsOpen(false)} updateValue={(newValue) => setValue(newValue)} />
+      view = <Days currentValue={_value} dismissModal={() => setModalIsOpen(false)} updateValue={(newValue) => setValue(newValue)} />
       break
   }
 
@@ -53,7 +62,7 @@ export const Datepicker: React.FC<DatepickerProps> = (props) => {
           type="text"
           readOnly
           disabled={disabled}
-          value={value.format("jYYYY/jMM/jDD")}
+          value={_value.format("jYYYY/jMM/jDD")}
           onClick={() => {
             if (!disabled) {
               setModalIsOpen(true)
@@ -65,7 +74,11 @@ export const Datepicker: React.FC<DatepickerProps> = (props) => {
       {errorMessage && <small className="block text-xs text-red-600 select-none">{errorMessage}</small>}
 
       <Modal isOpen={modalIsOpen} onDismis={() => setModalIsOpen(false)}>
-        <Board currentValue={value} switchView={() => (currentView == "days" ? setCurrentView("months") : setCurrentView("days"))} updateValue={(newValue) => setValue(newValue)} />
+        <Board
+          currentValue={_value}
+          switchView={() => (currentView == "days" ? setCurrentView("months") : setCurrentView("days"))}
+          updateValue={(newValue) => setValue(newValue)}
+        />
         {view}
       </Modal>
     </div>

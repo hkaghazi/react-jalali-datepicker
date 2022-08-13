@@ -12,20 +12,29 @@ type DatepickerProps = {
   errorMessage?: string
   disabled?: boolean
   containerStyle?: string
-  defaultValue?: Date
+  defaultValue?: moment.MomentInput
+  value?: moment.MomentInput
   onChangeValue?: (value: Moment) => void
 }
 
 export const Timepicker: React.FC<DatepickerProps> = (props) => {
-  const { errorMessage, containerStyle, label, className, defaultValue, onChangeValue, disabled } = props
-  const [value, setValue] = React.useState<moment.Moment>(moment(defaultValue))
+  const { errorMessage, containerStyle, label, className, defaultValue, onChangeValue, value, disabled } = props
+  const [_value, setValue] = React.useState<moment.Moment>(moment(defaultValue))
 
   // local variables
   const [modalIsOpen, setModalIsOpen] = React.useState(false)
 
   useEffect(() => {
     if (onChangeValue) {
-      onChangeValue(value)
+      onChangeValue(_value)
+    }
+  }, [_value])
+
+  useEffect(() => {
+    if (value) {
+      if (_value.format("hh:mm") != moment(value).format("hh:mm")) {
+        setValue(moment(value))
+      }
     }
   }, [value])
 
@@ -39,7 +48,7 @@ export const Timepicker: React.FC<DatepickerProps> = (props) => {
           type="text"
           readOnly
           disabled={disabled}
-          value={value.format("hh:mm")}
+          value={_value.format("hh:mm")}
           onClick={() => {
             if (!disabled) {
               setModalIsOpen(true)
@@ -51,9 +60,9 @@ export const Timepicker: React.FC<DatepickerProps> = (props) => {
       {errorMessage && <small className="block text-xs text-red-600 select-none">{errorMessage}</small>}
 
       <Modal isOpen={modalIsOpen} onDismis={() => setModalIsOpen(false)}>
-        <Board currentValue={value} showTime="onlyTime" updateValue={(newValue) => setValue(newValue)} />
+        <Board currentValue={_value} showTime="onlyTime" updateValue={(newValue) => setValue(newValue)} />
 
-        <Hours currentValue={value} updateValue={(newValue) => setValue(newValue)} />
+        <Hours currentValue={_value} updateValue={(newValue) => setValue(newValue)} />
       </Modal>
     </div>
   )
