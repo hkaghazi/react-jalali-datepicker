@@ -6,10 +6,11 @@ import "./Hours.scss"
 
 type DaysProps = {
   currentValue: Moment
+  dismissModal: () => void
   updateValue: (newValue: Moment) => void
 }
 
-export const Hours: React.FC<DaysProps> = ({ currentValue, updateValue }) => {
+export const Hours: React.FC<DaysProps> = ({ currentValue, updateValue, dismissModal }) => {
   const [currentHour, setCurrentHour] = useState<number>(new Date().getHours())
   const [currentMinute, setCurrentMinute] = useState<number>(new Date().getMinutes())
 
@@ -30,7 +31,7 @@ export const Hours: React.FC<DaysProps> = ({ currentValue, updateValue }) => {
     <div className="rjd__months-container">
       <SelectList list={minutesList()} defaultValue={currentMinute} onChange={(v) => updateValueByMinute(Number(v))} />
       <SelectList list={hoursList()} defaultValue={currentHour} onChange={(v) => updateValueByHour(Number(v))} />
-      <button type="button" className="rjd__btn-return" onClick={() => {}}>
+      <button type="button" className="rjd__btn-return" onClick={dismissModal}>
         تایید
       </button>
     </div>

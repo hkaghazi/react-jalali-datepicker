@@ -62,7 +62,7 @@ export const Timepicker: React.FC<DatepickerProps> = (props) => {
       <Modal isOpen={modalIsOpen} onDismis={() => setModalIsOpen(false)}>
         <Board currentValue={_value} showTime="onlyTime" updateValue={(newValue) => setValue(newValue)} />
 
-        <Hours currentValue={_value} updateValue={(newValue) => setValue(newValue)} />
+        <Hours currentValue={_value} updateValue={(newValue) => setValue(newValue)} dismissModal={() => setModalIsOpen(false)} />
       </Modal>
     </div>
   )

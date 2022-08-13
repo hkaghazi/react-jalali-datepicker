@@ -40,15 +40,22 @@ export const Datepicker: React.FC<DatepickerProps> = (props) => {
     }
   }, [value])
 
+  const onDayselect = (newValue: moment.Moment) => {
+    setValue(newValue)
+    if (newValue.format("YYYY-MM-DD") == _value.format("YYYY-MM-DD")) {
+      setModalIsOpen(false)
+    }
+  }
+
   //
   let view
   switch (currentView) {
     case "months":
-      view = <Months currentValue={_value} switchView={(v) => setCurrentView(v)} updateValue={(newValue) => setValue(newValue)} />
+      view = <Months currentValue={_value} switchView={(v) => setCurrentView(v)} updateValue={onDayselect} />
       break
 
     default:
-      view = <Days currentValue={_value} dismissModal={() => setModalIsOpen(false)} updateValue={(newValue) => setValue(newValue)} />
+      view = <Days currentValue={_value} dismissModal={() => setModalIsOpen(false)} updateValue={onDayselect} />
       break
   }
 
