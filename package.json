@@ -1,6 +1,6 @@
 {
   "name": "persian-datepicker-react",
-  "version": "1.0.25",
+  "version": "1.0.26",
   "description": "persian datepicker based on jalali-moment",
   "scripts": {
     "test": "jest",

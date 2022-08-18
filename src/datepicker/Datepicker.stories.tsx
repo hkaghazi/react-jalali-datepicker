@@ -20,6 +20,7 @@ const Template: ComponentStory<typeof Datepicker> = (args) => <Datepicker {...ar
 export const FirstTemp = Template.bind({})
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 FirstTemp.args = {
-  label: "Datepicker label",
-  defaultValue: new Date("2021-01-30"),
+  placeholder: "Datepicker label",
+  // defaultValue: new Date("2021-01-30"),
+  defaultValue: undefined,
 }
