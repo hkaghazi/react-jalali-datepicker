@@ -20,6 +20,6 @@ const Template: ComponentStory<typeof Timepicker> = (args) => <Timepicker {...ar
 export const FirstTemp = Template.bind({})
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 FirstTemp.args = {
-  label: "Timepicker label",
-  defaultValue: 1660331281000,
+  placeholder: "Timepicker label",
+  // defaultValue: 1660331281000,
 }

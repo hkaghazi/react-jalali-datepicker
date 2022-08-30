@@ -7,19 +7,20 @@ import { Board } from "../shared/board/Board"
 import "./Timepicker.scss"
 
 type DatepickerProps = {
-  label?: string
+  icon?: React.ReactNode
+  placeholder?: string
   className?: string
   errorMessage?: string
   disabled?: boolean
   containerStyle?: string
   defaultValue?: moment.MomentInput
   value?: moment.MomentInput
-  onChangeValue?: (value: Moment) => void
+  onChangeValue?: (value: Moment | undefined) => void
 }
 
 export const Timepicker: React.FC<DatepickerProps> = (props) => {
-  const { errorMessage, containerStyle, label, className, defaultValue, onChangeValue, value, disabled } = props
-  const [_value, setValue] = React.useState<moment.Moment>(moment(defaultValue))
+  const { errorMessage, containerStyle, className, defaultValue, onChangeValue, value, disabled } = props
+  const [_value, setValue] = React.useState<moment.Moment | undefined>(defaultValue ? moment(defaultValue) : undefined)
 
   // local variables
   const [modalIsOpen, setModalIsOpen] = React.useState(false)
@@ -32,37 +33,36 @@ export const Timepicker: React.FC<DatepickerProps> = (props) => {
 
   useEffect(() => {
     if (value && moment(value).isValid()) {
-      if (_value.format("hh:mm") != moment(value).format("hh:mm")) {
+      if (moment(value).format("hh:mm") != _value?.format("hh:mm")) {
         setValue(moment(value))
       }
     }
   }, [value])
 
   return (
-    <div className={`datepicker__wrapper ${containerStyle}`}>
-      <label htmlFor="datapicker__input">
-        <span>{label}</span>
+    <div className={`datepicker__wrapper ${containerStyle ?? ""}`}>
+      <label className="datepicker__label" htmlFor="datapicker__input">
+        {props.icon && <span className="inline-flex items-center px-1 flex-grow-0 select-none">{props.icon}</span>}
         <input
-          id="datapicker__input"
-          className={`${className} bg-gray-100 py-2 px-3 rounded-lg w-full ` + (errorMessage ? "border-2 border-red-600 focus:outline-none " : "")}
+          className={`datapicker__input ${className} bg-gray-100 py-2 px-3 rounded-lg w-full ` + (errorMessage ? "border-2 border-red-600 focus:outline-none " : "")}
           type="text"
           readOnly
           disabled={disabled}
-          value={_value.format("hh:mm")}
+          value={_value ? _value.format("hh:mm") : undefined}
           onClick={() => {
             if (!disabled) {
               setModalIsOpen(true)
             }
           }}
         />
+        {props.placeholder && <span className="datapicker__placeholder text-xs select-none">{props.placeholder}</span>}
       </label>
 
       {errorMessage && <small className="block text-xs text-red-600 select-none">{errorMessage}</small>}
 
       <Modal isOpen={modalIsOpen} onDismis={() => setModalIsOpen(false)}>
-        <Board currentValue={_value} showTime="onlyTime" updateValue={(newValue) => setValue(newValue)} />
-
-        <Hours currentValue={_value} updateValue={(newValue) => setValue(newValue)} dismissModal={() => setModalIsOpen(false)} />
+        <Board currentValue={_value ?? moment()} showTime="onlyTime" updateValue={(newValue) => setValue(newValue)} />
+        <Hours currentValue={_value ?? moment()} updateValue={(newValue) => setValue(newValue)} dismissModal={() => setModalIsOpen(false)} />
       </Modal>
     </div>
   )

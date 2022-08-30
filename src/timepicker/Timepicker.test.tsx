@@ -5,6 +5,6 @@ import { Timepicker } from "./Timepicker"
 
 describe("Datepicker", () => {
   test("renders the Datepicker component", () => {
-    render(<Timepicker label="timepicker" />)
+    render(<Timepicker placeholder="timepicker" />)
   })
 })

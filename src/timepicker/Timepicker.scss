@@ -1,3 +1,37 @@
 .datepicker__wrapper {
   direction: rtl;
 }
+
+.datepicker__label {
+  position: relative;
+
+  .datapicker__placeholder {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    padding-right: 32px;
+    pointer-events: none;
+    user-select: none;
+    // transition: all 0.2s ease-in-out;
+  }
+
+  &:focus-within .datapicker__placeholder {
+    font-size: 10px;
+    padding-right: 12px;
+    transform: translate(0px, -20px);
+  }
+
+  .datapicker__input::placeholder {
+    color: transparent;
+  }
+
+  .datapicker__input:not(:placeholder-shown) ~ .datapicker__placeholder {
+    font-size: 10px;
+    padding-right: 12px;
+    transform: translate(0px, -20px);
+  }
+}
