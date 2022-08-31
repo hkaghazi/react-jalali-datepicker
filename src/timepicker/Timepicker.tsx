@@ -48,7 +48,7 @@ export const Timepicker: React.FC<DatepickerProps> = (props) => {
           type="text"
           readOnly
           disabled={disabled}
-          value={_value ? _value.format("hh:mm") : undefined}
+          value={_value ? _value.format("hh:mm") : ""}
           onClick={() => {
             if (!disabled) {
               setModalIsOpen(true)

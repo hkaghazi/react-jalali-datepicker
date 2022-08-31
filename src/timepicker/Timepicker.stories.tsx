@@ -2,7 +2,6 @@ import React from "react"
 import { ComponentStory, ComponentMeta } from "@storybook/react"
 
 import { Timepicker } from "./Timepicker"
-import moment from "jalali-moment"
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -22,4 +21,5 @@ export const FirstTemp = Template.bind({})
 FirstTemp.args = {
   placeholder: "Timepicker label",
   // defaultValue: 1660331281000,
+  // value: new Date().valueOf()
 }

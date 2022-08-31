@@ -69,7 +69,7 @@ export const Datepicker: React.FC<DatepickerProps> = (props) => {
           type="text"
           readOnly
           disabled={disabled}
-          value={_value ? _value.format("jYYYY/jMM/jDD") : undefined}
+          value={_value ? _value.format("jYYYY/jMM/jDD") : ""}
           placeholder={props.placeholder}
           onClick={() => {
             if (!disabled) {

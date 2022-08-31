@@ -22,5 +22,7 @@ export const FirstTemp = Template.bind({})
 FirstTemp.args = {
   placeholder: "Datepicker label",
   // defaultValue: new Date("2021-01-30"),
-  defaultValue: undefined,
+  // defaultValue: undefined,
+  value: undefined,
+  onChangeValue: (v) => {console.log(v?.format('YYYY-MM-DD'))}
 }
