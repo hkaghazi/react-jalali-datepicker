@@ -6,7 +6,7 @@ import { Board } from "../shared/board/Board"
 
 import "./Timepicker.scss"
 
-type DatepickerProps = {
+type TimepickerProps = {
   icon?: React.ReactNode
   placeholder?: string
   className?: string
@@ -18,7 +18,7 @@ type DatepickerProps = {
   onChangeValue?: (value: Moment | undefined) => void
 }
 
-export const Timepicker: React.FC<DatepickerProps> = (props) => {
+export const Timepicker: React.FC<TimepickerProps> = (props) => {
   const { errorMessage, containerStyle, className, defaultValue, onChangeValue, value, disabled } = props
   const [_value, setValue] = React.useState<moment.Moment | undefined>(defaultValue ? moment(defaultValue) : undefined)
 
