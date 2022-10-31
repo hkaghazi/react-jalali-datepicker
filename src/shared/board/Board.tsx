@@ -41,7 +41,7 @@ export const Board: React.FC<BoardProps> = ({ currentValue, showTime = "onlyDate
         )}
         {(showTime == "both" || showTime == "onlyTime") && (
           <>
-            <span>{currentValue.format("hh:mm")}</span>
+            <span>{currentValue.locale("fa").format("hh:mm a")}</span>
           </>
         )}
       </main>

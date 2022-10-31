@@ -5,7 +5,7 @@ import { Days } from "../views/days/Days"
 import { Board } from "../shared/board/Board"
 import { Months } from "../views/months/Months"
 
-import "./Datepicker.scss"
+import "./Datepicker.style.scss"
 
 type DatepickerProps = {
   icon?: React.ReactNode

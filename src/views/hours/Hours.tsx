@@ -40,7 +40,7 @@ export const Hours: React.FC<DaysProps> = ({ currentValue, updateValue, dismissM
 
 const hoursList = () => {
   const hours = []
-  for (let i = 1; i <= 12; i++) {
+  for (let i = 0; i <= 23; i++) {
     hours.push({ id: i, name: i.toString() })
   }
   return hours
