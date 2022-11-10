@@ -65,7 +65,7 @@ export const Datepicker: React.FC<DatepickerProps> = (props) => {
       <label className="datepicker__label" htmlFor="datapicker__input">
         {props.icon && <span className="inline-flex items-center px-1 flex-grow-0 select-none">{props.icon}</span>}
         <input
-          className={`datapicker__input ${className} bg-gray-100 py-2 px-3 rounded-lg w-full ` + (errorMessage ? "border-2 border-red-600 focus:outline-none " : "")}
+          className={`datapicker__input ${className ?? "bg-gray-100 py-2 px-3 rounded-lg w-full"} ` + (errorMessage ? "border-2 border-red-600 focus:outline-none " : "")}
           type="text"
           readOnly
           disabled={disabled}
