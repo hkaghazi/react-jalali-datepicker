@@ -15,7 +15,7 @@ type DatepickerProps = {
   disabled?: boolean
   containerStyle?: string
   defaultValue?: moment.MomentInput
-  value?: moment.MomentInput
+  value?: moment.MomentInput | undefined
   onChangeValue?: (value: Moment | undefined) => void
 }
 
@@ -58,6 +58,10 @@ export const Datepicker: React.FC<DatepickerProps> = (props) => {
       if (moment(value).format("YYYY-MM-DD") != _value?.format("YYYY-MM-DD")) {
         setValue(moment(value))
       }
+    } else {
+      setDay("")
+      setMonth("")
+      setYear("")
     }
   }, [value])
 
