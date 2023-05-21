@@ -15,14 +15,18 @@ export default {
 } as ComponentMeta<typeof Datepicker>
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof Datepicker> = (args) => <Datepicker {...args} />
+const Template: ComponentStory<typeof Datepicker> = (args) => (
+  <Datepicker {...args} />
+)
 
 export const FirstTemp = Template.bind({})
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 FirstTemp.args = {
-  placeholder: "Datepicker label",
+  placeholder: ["روز", "ماه", "سال"],
   // defaultValue: new Date("2021-01-30"),
   // defaultValue: undefined,
   value: undefined,
-  onChangeValue: (v) => {console.log(v?.format('YYYY-MM-DD'))}
+  onChangeValue: (v) => {
+    console.log(v?.format("YYYY-MM-DD"))
+  },
 }
