@@ -99,7 +99,7 @@ export const Datepicker: React.FC<DatepickerProps> = (props) => {
           }}
         />
         {clearable && (
-          <button className="datapicker__clearable" onClick={() => setValue(undefined)}>
+          <button type="button" className="datapicker__clearable" onClick={() => setValue(undefined)}>
             X
           </button>
         )}
