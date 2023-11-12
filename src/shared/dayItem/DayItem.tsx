@@ -16,7 +16,7 @@ export const DayItem: React.FC<DayItemProps> = (props) => {
   const { date, numDay, selectable, isSelected, dayInWeek, updateValue } = props
 
   const selectNewDate = () => {
-    updateValue(moment(date, "jYYYY-jMM-jDD"))
+    updateValue(moment(new Date(date)))
   }
 
   return (

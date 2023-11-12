@@ -1,4 +1,8 @@
 .rjd__days-container {
+  .rjd_days-main-wrapper {
+    display: grid;
+    grid-template-columns: auto auto;
+  }
   .rjd_days-inner-wrapper {
     display: grid;
     grid-template-columns: auto auto auto auto auto auto auto;

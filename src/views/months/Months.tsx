@@ -21,10 +21,10 @@ export const Months: React.FC<DaysProps> = ({ currentValue, switchView, updateVa
   }, [currentValue])
 
   const updateValueByMonth = (value: string) => {
-    updateValue(moment(`${currentValue.format("jYYYY")}-${value}-${currentValue.format("jDD")}`, "jYYYY-jMM-jDD"))
+    updateValue(moment(`${currentValue.format("jYYYY")}-${value}-${currentValue.format("jDD")} ${currentValue.format("HH:mm")}`, "jYYYY-jMM-jDD HH:mm"))
   }
   const updateValueByYear = (value: string) => {
-    updateValue(moment(`${value}-${currentValue.format("jMM")}-${currentValue.format("jDD")}`, "jYYYY-jMM-jDD"))
+    updateValue(moment(`${value}-${currentValue.format("jMM")}-${currentValue.format("jDD")} ${currentValue.format("HH:mm")}`, "jYYYY-jMM-jDD HH:mm"))
   }
 
   return (

@@ -5,6 +5,13 @@
 .datepicker__label {
   position: relative;
 
+  .datapicker__clearable {
+    position: absolute;
+    left: 2px;
+    top: 2px;
+    background: transparent;
+    border: none;
+  }
   .datapicker__placeholder {
     position: absolute;
     display: flex;
