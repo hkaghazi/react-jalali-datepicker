@@ -1,5 +1,5 @@
 import React, { useEffect } from "react"
-import moment, { Moment } from "jalali-moment"
+import moment, { Moment } from "moment-jalaali"
 import { Modal } from "../shared/modal/Modal"
 import { Hours } from "../views/hours/Hours"
 import { Board } from "../shared/board/Board"

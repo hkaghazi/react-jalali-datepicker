@@ -1,4 +1,4 @@
-import moment, { Moment } from "jalali-moment"
+import moment, { Moment } from "moment-jalaali"
 import React from "react"
 
 import "./DayItem.scss"

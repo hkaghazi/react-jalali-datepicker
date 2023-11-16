@@ -1,7 +1,7 @@
 {
   "name": "persian-datepicker-react",
-  "version": "1.0.37",
-  "description": "persian datepicker based on jalali-moment",
+  "version": "1.0.45",
+  "description": "persian datepicker based on moment-jalalli",
   "scripts": {
     "test": "jest",
     "rollup": "rollup -c",
@@ -26,7 +26,7 @@
     "url": "git+ssh://git@github.com/HKaghazi/react-jalali-datepicker.git"
   },
   "dependencies": {
-    "jalali-moment": "^3.3.10"
+    "moment-jalaali": "^0.9.6"
   },
   "peerDependencies": {
     "react": ">= 17.0.2",
@@ -67,7 +67,8 @@
     "sass-loader": "^12.6.0",
     "style-loader": "^3.3.1",
     "typescript": "^4.5.5",
-    "webpack": "^5.67.0"
+    "webpack": "^5.67.0",
+    "@types/moment-jalaali": "^0.7.5"
   },
   "bugs": {
     "url": "https://github.com/HKaghazi/react-jalali-datepicker/issues"

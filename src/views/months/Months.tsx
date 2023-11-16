@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import moment, { Moment } from "jalali-moment"
+import moment, { Moment } from "moment-jalaali"
 import { SelectList } from "../../shared/selectList/SelectList"
 import { months } from "../../helpers/persianMonthName"
 

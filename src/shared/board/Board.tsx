@@ -1,9 +1,9 @@
-import moment, { Moment } from "jalali-moment"
+import moment, { Moment } from "moment-jalaali"
 import React from "react"
 import { ArrowLeftCMP, ArrowRightCMP } from "../icons/Icons"
 import "./Board.scss"
 
-moment.locale("fa")
+moment.loadPersian({ dialect: "persian-modern" })
 
 type BoardProps = {
   currentValue: Moment
@@ -32,7 +32,7 @@ export const Board: React.FC<BoardProps> = ({ currentValue, showTime = "onlyDate
       </div>
 
       <main className="rjd__board-text" onClick={switchView}>
-        <span>{currentValue.format(showTime == "both" ? "jD MMMM jYYYY HH:mm" : showTime == "onlyTime" ? "HH:mm" : "jD MMMM jYYYY")}</span>
+        <span>{currentValue.format(showTime == "both" ? "jD jMMMM jYYYY HH:mm" : showTime == "onlyTime" ? "HH:mm" : "jD MMMM jYYYY")}</span>
       </main>
 
       <div>

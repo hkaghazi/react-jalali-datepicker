@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { Moment } from "jalali-moment"
+import moment, { Moment } from "moment-jalaali"
 import { DaysHead } from "../../shared/daysHead/DaysHead"
 import { DayItem } from "../../shared/dayItem/DayItem"
 import { Hours } from "../hours/Hours"
@@ -60,7 +60,7 @@ const daysBeforeThisMonth = (currentValue: Moment) => {
   const weekOfFirstDayOFMonth = clonedDate.startOf("jMonth").weekday()
 
   for (let dayIdx = 0; dayIdx < weekOfFirstDayOFMonth; dayIdx++) {
-    firstDayOFMonth.subtract(6 - dayIdx, "jDay")
+    firstDayOFMonth.subtract(6 - dayIdx, "day")
     daysInMonth.push({
       date: firstDayOFMonth.toISOString(),
       numDay: Number(firstDayOFMonth.format("jDD")),
@@ -74,12 +74,14 @@ const daysBeforeThisMonth = (currentValue: Moment) => {
   return daysInMonth
 }
 
+const jDaysInMonth = (date: Moment) => moment(date.endOf("jMonth")).diff(date.startOf("jMonth"), "day")
+
 const daysThisMonth = (currentValue: Moment) => {
   const daysInMonth = []
   const clonedDate = currentValue.clone()
   const firstDayOFMonth = clonedDate.startOf("jMonth").set("hour", currentValue.get("hour")).set("minute", currentValue.get("minute"))
   const firstDayCloned = firstDayOFMonth.clone()
-  for (let dayIdx = 1; dayIdx <= clonedDate.jDaysInMonth(); dayIdx++) {
+  for (let dayIdx = 1; dayIdx <= jDaysInMonth(clonedDate); dayIdx++) {
     daysInMonth.push({
       date: firstDayCloned.toISOString(),
       numDay: Number(firstDayCloned.format("jDD")),
@@ -100,7 +102,7 @@ const daysAfterThisMonth = (currentValue: Moment) => {
   const weekOfLastDayOFMonth = clonedDate.endOf("jMonth").weekday()
 
   for (let dayIdx = 1; dayIdx <= 6 - weekOfLastDayOFMonth; dayIdx++) {
-    lastDayOFMonth.add(dayIdx, "jDay")
+    lastDayOFMonth.add(dayIdx, "day")
     daysInMonth.push({
       date: lastDayOFMonth.toISOString(),
       numDay: Number(lastDayOFMonth.format("jDD")),

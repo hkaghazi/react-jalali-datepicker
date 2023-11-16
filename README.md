@@ -1,3 +1,3 @@
-# React Jalali datepicker based on jalali-moment
+# React Jalali datepicker based on moment-jalaali
 
 Update description

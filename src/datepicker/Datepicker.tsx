@@ -1,10 +1,11 @@
-import moment, { Moment } from "jalali-moment"
+import moment, { Moment } from "moment-jalaali"
 import React, { useEffect } from "react"
 import { Board } from "../shared/board/Board"
 import { Modal } from "../shared/modal/Modal"
 import { Days } from "../views/days/Days"
 import { Months } from "../views/months/Months"
-import { Hours } from "../views/hours/Hours"
+
+moment.loadPersian({ dialect: "persian-modern" })
 
 import "./Datepicker.style.scss"
 
@@ -41,26 +42,26 @@ export const Datepicker: React.FC<DatepickerProps> = (props) => {
   const [modalIsOpen, setModalIsOpen] = React.useState(false)
   const [currentView, setCurrentView] = React.useState<"days" | "months" | "years">("days")
 
-  useEffect(() => {
-    if (onChangeValue) {
-      onChangeValue(_value)
-    }
-  }, [_value])
-
   // useEffect(() => {
-  //   if (value && moment(value).isValid()) {
-  //     if (moment(value).format("YYYY-MM-DD") != _value?.format("YYYY-MM-DD")) {
-  //       setValue(moment(value))
-  //     }
-  //   } else {
-  //     setDay("")
-  //     setMonth("")
-  //     setYear("")
-  //   }
-  // }, [value])
+  //   if (!onChangeValue) return
+  //   onChangeValue(_value)
+  // }, [_value])
 
-  const onDayselect = (newValue: moment.Moment) => {
+  useEffect(() => {
+    if (!value) {
+      setValue(undefined)
+    } else {
+      if (moment(value).format(dateTimeFormat) != _value?.format(dateTimeFormat)) {
+        setValue(moment(value))
+      }
+    }
+  }, [value])
+
+  const onUpdateValue = (newValue: moment.Moment) => {
     setValue(newValue)
+
+    if (!onChangeValue) return
+    onChangeValue(newValue)
     // setDay(String(newValue.jDate()))
     // setMonth(String(newValue.jMonth() + 1))
     // setYear(String(newValue.jYear()))
@@ -73,11 +74,11 @@ export const Datepicker: React.FC<DatepickerProps> = (props) => {
   let view
   switch (currentView) {
     case "months":
-      view = <Months currentValue={_value ?? moment()} switchView={(v) => setCurrentView(v)} updateValue={onDayselect} />
+      view = <Months currentValue={_value ?? moment()} switchView={(v) => setCurrentView(v)} updateValue={onUpdateValue} />
       break
 
     default:
-      view = <Days showTime={showTime} currentValue={_value ?? moment()} dismissModal={() => setModalIsOpen(false)} updateValue={onDayselect} />
+      view = <Days showTime={showTime} currentValue={_value ?? moment()} dismissModal={() => setModalIsOpen(false)} updateValue={onUpdateValue} />
       break
   }
 

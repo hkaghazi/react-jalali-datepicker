@@ -1,8 +1,7 @@
+import { ComponentMeta, ComponentStory } from "@storybook/react"
 import React from "react"
-import { ComponentStory, ComponentMeta } from "@storybook/react"
 
 import { Datepicker } from "./Datepicker"
-import moment from "jalali-moment"
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {

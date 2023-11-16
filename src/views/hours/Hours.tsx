@@ -1,5 +1,5 @@
+import { Moment } from "moment-jalaali"
 import React, { useEffect, useState } from "react"
-import moment, { Moment } from "jalali-moment"
 import { SelectList } from "../../shared/selectList/SelectList"
 
 import "./Hours.scss"
