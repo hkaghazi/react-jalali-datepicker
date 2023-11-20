@@ -54,13 +54,13 @@ export const Days: React.FC<DaysProps> = ({ currentValue, showTime, updateValue,
 }
 
 const daysBeforeThisMonth = (currentValue: Moment) => {
-  const daysInMonth = []
+  let daysInMonth = []
   const clonedDate = currentValue.clone()
-  let firstDayOFMonth = clonedDate.startOf("jMonth").set("hour", currentValue.get("hour")).set("minute", currentValue.get("minute"))
   const weekOfFirstDayOFMonth = clonedDate.startOf("jMonth").weekday()
 
-  for (let dayIdx = 0; dayIdx < weekOfFirstDayOFMonth; dayIdx++) {
-    firstDayOFMonth.subtract(6 - dayIdx, "day")
+  const firstDayOFMonth = clonedDate.startOf("jMonth").set("hour", currentValue.get("hour")).set("minute", currentValue.get("minute"))
+  for (let dayIdx = 1; dayIdx <= weekOfFirstDayOFMonth; dayIdx++) {
+    firstDayOFMonth.subtract(1, "day")
     daysInMonth.push({
       date: firstDayOFMonth.toISOString(),
       numDay: Number(firstDayOFMonth.format("jDD")),
@@ -68,13 +68,12 @@ const daysBeforeThisMonth = (currentValue: Moment) => {
       isSelected: firstDayOFMonth.diff(currentValue, "d") == 0,
       selectable: false,
     })
-    firstDayOFMonth = currentValue.clone().startOf("jMonth").set("hour", currentValue.get("hour")).set("minute", currentValue.get("minute"))
   }
-
+  daysInMonth = daysInMonth.reverse()
   return daysInMonth
 }
 
-const jDaysInMonth = (date: Moment) => moment(date.endOf("jMonth")).diff(date.startOf("jMonth"), "day")
+const jDaysInMonth = (date: Moment) => moment(date.endOf("jMonth")).diff(date.startOf("jMonth"), "day") + 1
 
 const daysThisMonth = (currentValue: Moment) => {
   const daysInMonth = []
@@ -91,18 +90,17 @@ const daysThisMonth = (currentValue: Moment) => {
     })
     firstDayCloned.add(1, "d")
   }
-
   return daysInMonth
 }
 
 const daysAfterThisMonth = (currentValue: Moment) => {
   const daysInMonth = []
   const clonedDate = currentValue.clone()
-  let lastDayOFMonth = clonedDate.endOf("jMonth").set("hour", currentValue.get("hour")).set("minute", currentValue.get("minute"))
   const weekOfLastDayOFMonth = clonedDate.endOf("jMonth").weekday()
 
+  const lastDayOFMonth = clonedDate.endOf("jMonth").set("hour", currentValue.get("hour")).set("minute", currentValue.get("minute"))
   for (let dayIdx = 1; dayIdx <= 6 - weekOfLastDayOFMonth; dayIdx++) {
-    lastDayOFMonth.add(dayIdx, "day")
+    lastDayOFMonth.add(1, "day")
     daysInMonth.push({
       date: lastDayOFMonth.toISOString(),
       numDay: Number(lastDayOFMonth.format("jDD")),
@@ -110,8 +108,6 @@ const daysAfterThisMonth = (currentValue: Moment) => {
       isSelected: lastDayOFMonth.diff(currentValue, "d") == 0,
       selectable: false,
     })
-
-    lastDayOFMonth = currentValue.clone().endOf("jMonth").set("hour", currentValue.get("hour")).set("minute", currentValue.get("minute"))
   }
 
   return daysInMonth

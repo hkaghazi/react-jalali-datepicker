@@ -5,6 +5,21 @@ import "./Board.scss"
 
 moment.loadPersian({ dialect: "persian-modern" })
 
+const persianMonths: { [key: number]: string } = {
+  1: "فروردین",
+  2: "اردیبهشت",
+  3: "خرداد",
+  4: "تیر",
+  5: "مرداد",
+  6: "شهریور",
+  7: "مهر",
+  8: "آبان",
+  9: "آذر",
+  10: "دی",
+  11: "بهمن",
+  12: "اسفند",
+}
+
 type BoardProps = {
   currentValue: Moment
   showTime?: "onlyTime" | "onlyDate" | "both"
@@ -13,6 +28,7 @@ type BoardProps = {
 }
 
 export const Board: React.FC<BoardProps> = ({ currentValue, showTime = "onlyDate", switchView, updateValue }) => {
+  const monthNum = currentValue.jMonth()
   const goAMonthAhead = () => {
     updateValue(currentValue.add(1, "jMonth").clone())
   }
@@ -32,7 +48,9 @@ export const Board: React.FC<BoardProps> = ({ currentValue, showTime = "onlyDate
       </div>
 
       <main className="rjd__board-text" onClick={switchView}>
-        <span>{currentValue.format(showTime == "both" ? "jD jMMMM jYYYY HH:mm" : showTime == "onlyTime" ? "HH:mm" : "jD MMMM jYYYY")}</span>
+        <span>
+          {currentValue.format(showTime == "both" ? `jD [${persianMonths[monthNum]}] jYYYY HH:mm` : showTime == "onlyTime" ? "HH:mm" : `jD [${persianMonths[monthNum]}] jYYYY`)}
+        </span>
       </main>
 
       <div>
