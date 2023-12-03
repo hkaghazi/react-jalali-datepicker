@@ -4,6 +4,7 @@ import { Board } from "../shared/board/Board"
 import { Modal } from "../shared/modal/Modal"
 import { Days } from "../views/days/Days"
 import { Months } from "../views/months/Months"
+import { SvgX } from "../icons/svg-x"
 
 moment.loadPersian({ dialect: "persian-modern" })
 
@@ -21,10 +22,24 @@ type DatepickerProps = {
   onChangeValue?: (value: Moment | undefined) => void
   showTime?: "onlyTime" | "onlyDate" | "both"
   clearable?: boolean
+  clearButtonClassName?: string
+  clearButtonSvgClassName?: string
 }
 
 export const Datepicker: React.FC<DatepickerProps> = (props) => {
-  const { errorMessage, containerStyle, className, defaultValue, value, onChangeValue, clearable = false, disabled, showTime = "onlyDate" } = props
+  const {
+    errorMessage,
+    containerStyle,
+    className,
+    defaultValue,
+    value,
+    onChangeValue,
+    clearable = false,
+    disabled,
+    showTime = "onlyDate",
+    clearButtonClassName,
+    clearButtonSvgClassName,
+  } = props
   const [_value, setValue] = React.useState<moment.Moment | undefined>(defaultValue ? moment(defaultValue) : undefined)
 
   const dateTimeFormat = showTime == "both" ? "jYYYY/jMM/jDD HH:mm" : "jYYYY/jMM/jDD"
@@ -100,8 +115,8 @@ export const Datepicker: React.FC<DatepickerProps> = (props) => {
           }}
         />
         {clearable && (
-          <button type="button" className="datapicker__clearable" onClick={() => setValue(undefined)}>
-            X
+          <button type="button" className={`datapicker__clearable ${clearButtonClassName}`} onClick={() => setValue(undefined)}>
+            <SvgX style={{ width: 16, height: 16 }} className={clearButtonSvgClassName} />
           </button>
         )}
         {props.placeholder && <span className="datapicker__placeholder text-xs select-none">{props.placeholder}</span>}
