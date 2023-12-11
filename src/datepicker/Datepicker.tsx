@@ -72,7 +72,7 @@ export const Datepicker: React.FC<DatepickerProps> = (props) => {
     }
   }, [value])
 
-  const onUpdateValue = (newValue: moment.Moment) => {
+  const onUpdateValue = (newValue: moment.Moment | undefined) => {
     setValue(newValue)
 
     if (!onChangeValue) return
@@ -115,7 +115,7 @@ export const Datepicker: React.FC<DatepickerProps> = (props) => {
           }}
         />
         {clearable && (
-          <button type="button" className={`datapicker__clearable ${clearButtonClassName}`} onClick={() => setValue(undefined)}>
+          <button type="button" className={`datapicker__clearable ${clearButtonClassName}`} onClick={() => onUpdateValue(undefined)}>
             <SvgX style={{ width: 16, height: 16 }} className={clearButtonSvgClassName} />
           </button>
         )}
